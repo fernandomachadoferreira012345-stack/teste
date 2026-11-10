@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>NEON VELOCITY CUSTOMS | Underground Deluxe JDM Portal</title>
+    <meta name="description" content="O portal de elite automotiva. Drag racing, estética Tokyo Drift e preparação extrema. Animação de scroll cinemática, showroom JDM e peças de alta performance." />
+
+    <!-- Google Fonts: Racing Display & Technical Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700;1,800&family=JetBrains+Mono:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Estilos Principais -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Overlay de Efeito Scanlines / Malha de Fibra de Carbono -->
+    <div class="carbon-texture-overlay" aria-hidden="true"></div>
+
+    <!-- Barra de Navegação Flutuante Neon-Noir -->
+    <header class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#hero" class="nav-logo" aria-label="Neon Velocity Customs">
+          <span class="logo-racing">NEON VELOCITY</span>
+          <span class="logo-sub">CUSTOMS // TOKYO SPEC</span>
+        </a>
+
+        <div class="nav-telemetry">
+          <span class="pulse-indicator"></span>
+          <span class="telemetry-text">DYNO LAB // 2.4 BAR BOOST READY</span>
+        </div>
+
+        <nav class="nav-links" id="nav-menu">
+          <a href="#hero" class="nav-link">The Line</a>
+          <a href="#showroom" class="nav-link">JDM Legends</a>
+          <a href="#mod-shop" class="nav-link">The Mod Shop</a>
+          <a href="#parts-vault" class="nav-link">Parts Vault</a>
+        </nav>
+
+        <a href="#contract-section" class="btn-neon-primary nav-cta">
+          <span class="btn-glitch-text">CONTRATO DE ELITE</span>
+          <span class="btn-glow-border"></span>
+        </a>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ========================================== -->
+      <!-- SEÇÃO 1: HERO COM ANIMAÇÃO DE SCROLL (242 FRAMES) -->
+      <!-- ========================================== -->
+      <section class="scroll-hero-section" id="hero">
+        <!-- Barra de Progresso de Pré-carregamento dos 242 Frames -->
+        <div class="loader-overlay" id="loader-overlay" aria-live="polite">
+          <div class="loader-box">
+            <div class="loader-header">
+              <span class="loader-title">NEON SYSTEM BOOT</span>
+              <span class="loader-status" id="loader-status">CARREGANDO TELEMETRIA... 0%</span>
+            </div>
+            <div class="loader-bar-track">
+              <div class="loader-bar-fill" id="loader-bar-fill"></div>
+            </div>
+            <div class="loader-subtext" id="loader-subtext">Sincronizando 242 frames sequenciais de alta performance...</div>
+          </div>
+        </div>
+
+        <!-- Container Fixo / Preso durante a rolagem (Sticky Viewport) -->
+        <div class="sticky-viewport" id="sticky-viewport">
+          <!-- Canvas de Renderização da Sequência de 242 Imagens -->
+          <canvas id="scroll-canvas" width="1920" height="1080"></canvas>
+
+          <!-- Filtro de Vinheta e Luz Neon Refletida no Asfalto Molhado -->
+          <div class="canvas-vignette" aria-hidden="true"></div>
+
+          <!-- HUD Telemetria Superior (Estilo Painel Digital de Corrida de Rua) -->
+          <div class="hud-overlay" id="hud-overlay">
+            <div class="hud-top">
+              <div class="hud-badge cyan">
+                <span class="hud-label">FRAME SEQ</span>
+                <span class="hud-val" id="hud-frame-counter">FRAME 001 / 242</span>
+              </div>
+              <div class="hud-badge magenta">
+                <span class="hud-label">TURBO BOOST</span>
+                <span class="hud-val" id="hud-boost-val">0.4 BAR</span>
+              </div>
+              <div class="hud-badge white">
+                <span class="hud-label">RPM STAGE</span>
+                <span class="hud-val" id="hud-rpm-val">3.200 RPM</span>
+              </div>
+            </div>
+
+            <!-- Textos Cinemáticos Escalonados que surgem em diferentes momentos do Scroll -->
+            <div class="hud-narrative-container">
+              <div class="narrative-card" id="narrative-step-1">
+                <div class="tag-label">A TENSÃO DA LARGADA // 001 - 060</div>
+                <h1 class="narrative-headline">
+                  O ASFALTO NÃO PERDOA <br />
+                  <span class="glow-cyan">HESITAÇÃO.</span>
+                </h1>
+                <p class="narrative-body">
+                  Role a página para acelerar a sequência de combustão. 242 frames sincronizados de engenharia clandestina e asfalto de Shibuya.
+                </p>
+                <div class="scroll-prompt">
+                  <span class="scroll-arrow">↓</span>
+                  <span class="scroll-text">ROLE PARA AVANÇAR A ANIMAÇÃO</span>
+                </div>
+              </div>
+
+              <div class="narrative-card hidden" id="narrative-step-2">
+                <div class="tag-label">PRESSÃO MÁXIMA // 061 - 130</div>
+                <h2 class="narrative-headline">
+                  TURBO EM SPOOL TOTAL. <br />
+                  <span class="glow-magenta">CORPO EM CARBONO.</span>
+                </h2>
+                <p class="narrative-body">
+                  Cada milissegundo de injeção mapeado para torque instantâneo. A fumaça dos pneus frios aquece a linha de partida.
+                </p>
+              </div>
+
+              <div class="narrative-card hidden" id="narrative-step-3">
+                <div class="tag-label">VELOCIDADE TERMINAL // 131 - 190</div>
+                <h2 class="narrative-headline">
+                  LUZES NEON REFLETIDAS <br />
+                  <span class="glow-cyan">NA PINTURA MOLHADA.</span>
+                </h2>
+                <p class="narrative-body">
+                  O equilíbrio visceral entre a agressividade bruta das pistas de arrancada e a sofisticação da alta relojoaria automotiva.
+                </p>
+              </div>
+
+              <div class="narrative-card hidden" id="narrative-step-4">
+                <div class="tag-label">TOKYO DRIFT ELITE // 191 - 242</div>
+                <h2 class="narrative-headline">
+                  BEM-VINDO À <br />
+                  <span class="glow-gradient">NEON VELOCITY.</span>
+                </h2>
+                <p class="narrative-body">
+                  A sequência está completa. Seu acesso à garagem secreta está liberado. Desça para o Showroom.
+                </p>
+                <div class="narrative-actions">
+                  <a href="#showroom" class="btn-neon-cyan">EXPLORAR SHOWROOM</a>
+                  <a href="#contract-section" class="btn-neon-magenta">ASSINAR PROJETO</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Barra Inferior de Progresso da Sequência de 242 Frames -->
+            <div class="hud-bottom-track">
+              <div class="hud-progress-fill" id="hud-progress-fill"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 2: SHOWROOM "THE JDM LEGENDS" -->
+      <!-- ========================================== -->
+      <section class="section-container" id="showroom">
+        <div class="section-header">
+          <div class="section-tag">THE JDM LEGENDS // ACERVO EXCLUSIVO</div>
+          <h2 class="section-title">MÁQUINAS QUE FORJARAM <span class="glow-cyan">A CULTURA.</span></h2>
+          <p class="section-subtitle">
+            Projetos construídos artesanalmente do chassi ao mapa da injeção. Peças forjadas, turbos roletados e pintura em 6 camadas de verniz vitrificado.
+          </p>
+        </div>
+
+        <div class="car-gallery-grid">
+          <!-- Carro 1: The Icon (Honda Civic 1995) -->
+          <article class="car-card glass-panel" data-car="civic">
+            <div class="car-badge-hot">THE ICON</div>
+            <div class="car-image-box">
+              <img src="https://images.unsplash.com/photo-1607603750909-408e193868c7?auto=format&fit=crop&w=1200&q=80" alt="Honda Civic 1995 Candy Red Custom Build" loading="lazy" />
+              <div class="car-price-tag">R$ 85.000</div>
+            </div>
+            <div class="car-details">
+              <div class="car-header-row">
+                <h3 class="car-name">Honda Civic Hatch 1995</h3>
+                <span class="car-edition">Stage 3 Street / Drag</span>
+              </div>
+              <p class="car-desc">
+                Cofre limpo shaved bay, motor B16 VTEC forjado com turbo Garret G25, pintura Candy Red tricoat perolizada, suspensão a ar AirLift 3H com sensores de altura e interior moldado em alcântara negra.
+              </p>
+              <div class="specs-grid">
+                <div class="spec-item"><span class="spec-k">POTÊNCIA:</span> <span class="spec-v glow-cyan">440 WHP</span></div>
+                <div class="spec-item"><span class="spec-k">MOTOR:</span> <span class="spec-v">B16 Forjado</span></div>
+                <div class="spec-item"><span class="spec-k">TURBO:</span> <span class="spec-v">1.8 BAR</span></div>
+                <div class="spec-item"><span class="spec-k">0-100 KM/H:</span> <span class="spec-v glow-magenta">3.6s</span></div>
+              </div>
+              <button class="btn-proposta" data-carro="Honda Civic 1995 (R$ 85.000)">FAZER PROPOSTA VIA WHATSAPP</button>
+            </div>
+          </article>
+
+          <!-- Carro 2: The Godzilla (Nissan Skyline GT-R R34) -->
+          <article class="car-card glass-panel active-highlight" data-car="r34">
+            <div class="car-badge-hot">THE GODZILLA</div>
+            <div class="car-image-box">
+              <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80" alt="Nissan Skyline GT-R R34 Bayside Blue" loading="lazy" />
+              <div class="car-price-tag">R$ 680.000</div>
+            </div>
+            <div class="car-details">
+              <div class="car-header-row">
+                <h3 class="car-name">Nissan Skyline GT-R R34</h3>
+                <span class="car-edition">V-Spec II Nismo Z-Tune</span>
+              </div>
+              <p class="car-desc">
+                O ápice de Yokohama. Pintura Bayside Blue original, bloco RB26DETT N1 com virabrequim forjado, Twin Turbo HKS GTIII, tração integral ATTESA E-TS Pro e kit Widebody Nismo em fibra de carbono crua.
+              </p>
+              <div class="specs-grid">
+                <div class="spec-item"><span class="spec-k">POTÊNCIA:</span> <span class="spec-v glow-cyan">650 WHP</span></div>
+                <div class="spec-item"><span class="spec-k">MOTOR:</span> <span class="spec-v">RB26DETT N1</span></div>
+                <div class="spec-item"><span class="spec-k">TURBO:</span> <span class="spec-v">Twin 2.1 BAR</span></div>
+                <div class="spec-item"><span class="spec-k">0-100 KM/H:</span> <span class="spec-v glow-magenta">2.9s</span></div>
+              </div>
+              <button class="btn-proposta" data-carro="Nissan Skyline GT-R R34 (R$ 680.000)">FAZER PROPOSTA VIA WHATSAPP</button>
+            </div>
+          </article>
+
+          <!-- Carro 3: The Beast (Toyota Supra MK4) -->
+          <article class="car-card glass-panel" data-car="supra">
+            <div class="car-badge-hot">THE BEAST</div>
+            <div class="car-image-box">
+              <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80" alt="Toyota Supra MK4 Silver Metallic" loading="lazy" />
+              <div class="car-price-tag">R$ 520.000</div>
+            </div>
+            <div class="car-details">
+              <div class="car-header-row">
+                <h3 class="car-name">Toyota Supra MK4 1998</h3>
+                <span class="car-edition">2JZ Single Big Turbo Spec</span>
+              </div>
+              <p class="car-desc">
+                Lendário motor 2JZ-GTE com pistões CP-Carrillo, cabeçote trabalhado com comando Brian Crower, Single Turbo Precision 6870, câmbio Getrag V160 6 marchas e rodas cromadas Work Meister S1 3 peças.
+              </p>
+              <div class="specs-grid">
+                <div class="spec-item"><span class="spec-k">POTÊNCIA:</span> <span class="spec-v glow-cyan">850 WHP</span></div>
+                <div class="spec-item"><span class="spec-k">MOTOR:</span> <span class="spec-v">2JZ-GTE Forjado</span></div>
+                <div class="spec-item"><span class="spec-k">TURBO:</span> <span class="spec-v">Single 2.4 BAR</span></div>
+                <div class="spec-item"><span class="spec-k">0-100 KM/H:</span> <span class="spec-v glow-magenta">2.8s</span></div>
+              </div>
+              <button class="btn-proposta" data-carro="Toyota Supra MK4 (R$ 520.000)">FAZER PROPOSTA VIA WHATSAPP</button>
+            </div>
+          </article>
+
+          <!-- Carro 4: The Drift King (Mazda RX-7 FD) -->
+          <article class="car-card glass-panel" data-car="rx7">
+            <div class="car-badge-hot">THE DRIFT KING</div>
+            <div class="car-image-box">
+              <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1200&q=80" alt="Mazda RX-7 FD Tokyo Drift Spec" loading="lazy" />
+              <div class="car-price-tag">R$ 430.000</div>
+            </div>
+            <div class="car-details">
+              <div class="car-header-row">
+                <h3 class="car-name">Mazda RX-7 FD3S</h3>
+                <span class="car-edition">VeilSide Fortune Bodykit</span>
+              </div>
+              <p class="car-desc">
+                A silhueta inesquecível de Tóquio. Motor rotativo 13B-REW Bridge Ported com Twin Turbo sequencial, libré aerodinâmica VeilSide Fortune em Sunset Orange e preto carbono, freios Endless e ângulo de esterçamento ampliado.
+              </p>
+              <div class="specs-grid">
+                <div class="spec-item"><span class="spec-k">POTÊNCIA:</span> <span class="spec-v glow-cyan">510 WHP</span></div>
+                <div class="spec-item"><span class="spec-k">MOTOR:</span> <span class="spec-v">13B Rotary Twin</span></div>
+                <div class="spec-item"><span class="spec-k">TURBO:</span> <span class="spec-v">1.7 BAR</span></div>
+                <div class="spec-item"><span class="spec-k">0-100 KM/H:</span> <span class="spec-v glow-magenta">3.2s</span></div>
+              </div>
+              <button class="btn-proposta" data-carro="Mazda RX-7 FD VeilSide (R$ 430.000)">FAZER PROPOSTA VIA WHATSAPP</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 3: MENU DE SERVIÇOS "THE MOD SHOP" -->
+      <!-- ========================================== -->
+      <section class="section-container" id="mod-shop">
+        <div class="section-header">
+          <div class="section-tag">THE MOD SHOP // TABELA & CHECKLIST DE PERFORMANCE</div>
+          <h2 class="section-title">CALCULE O SETUP DA <span class="glow-magenta">SUA MÁQUINA.</span></h2>
+          <p class="section-subtitle">
+            Selecione as customizações desejadas. Nosso simulador calcula o investimento e gera o contrato pré-preenchido para envio imediato.
+          </p>
+        </div>
+
+        <div class="mod-shop-container glass-panel">
+          <div class="mod-categories-grid">
+            <!-- Categoria: Estética -->
+            <div class="mod-category-card">
+              <div class="cat-header">
+                <span class="cat-icon">🎨</span>
+                <h3 class="cat-title">Estética & Acabamento</h3>
+              </div>
+              <div class="mod-items-list">
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="5000" data-name="Pintura Custom / Perolizada 6 Camadas" />
+                  <span class="mod-name">Pintura Custom / Perolizada (6 Camadas)</span>
+                  <span class="mod-price">+ R$ 5.000</span>
+                </label>
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="2500" data-name="Envelopamento Carbono Fosco / Satin" />
+                  <span class="mod-name">Envelopamento Carbono Fosco / Satin</span>
+                  <span class="mod-price">+ R$ 2.500</span>
+                </label>
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="1800" data-name="Kit Underglow Neon Cyan/Magenta Bluetooth" />
+                  <span class="mod-name">Kit Underglow Neon Cyan/Magenta</span>
+                  <span class="mod-price">+ R$ 1.800</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Categoria: Postura (Stance) -->
+            <div class="mod-category-card">
+              <div class="cat-header">
+                <span class="cat-icon">⚡</span>
+                <h3 class="cat-title">Postura & Chassi (Stance)</h3>
+              </div>
+              <div class="mod-items-list">
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="1200" data-name="Rebaixamento Profissional Coilovers Reguláveis" />
+                  <span class="mod-name">Rebaixamento Coilovers Reguláveis</span>
+                  <span class="mod-price">+ R$ 1.200</span>
+                </label>
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="6000" data-name="Suspensão a Ar Inteligente com Sensores de Altura" />
+                  <span class="mod-name">Suspensão a Ar Inteligente 4 Vias</span>
+                  <span class="mod-price">+ R$ 6.000</span>
+                </label>
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="1500" data-name="Barra Anti-Torção em Titânio + Buchas PU" />
+                  <span class="mod-name">Barra Anti-Torção Titânio + Buchas PU</span>
+                  <span class="mod-price">+ R$ 1.500</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Categoria: Rodas e Pneus -->
+            <div class="mod-category-card">
+              <div class="cat-header">
+                <span class="cat-icon">🏁</span>
+                <h3 class="cat-title">Rodas & Pneus Grip</h3>
+              </div>
+              <div class="mod-items-list">
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="4000" data-name="Setup Rodas JDM Forjadas + Pneus Semi-Slick" />
+                  <span class="mod-name">Rodas JDM Forjadas + Pneus Semi-Slick</span>
+                  <span class="mod-price">+ R$ 4.000</span>
+                </label>
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="3200" data-name="Espaçadores sob Medida + Alinhamento Drift Spec" />
+                  <span class="mod-name">Espaçadores + Geometria Drift Spec</span>
+                  <span class="mod-price">+ R$ 3.200</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Categoria: Performance -->
+            <div class="mod-category-card">
+              <div class="cat-header">
+                <span class="cat-icon">🔥</span>
+                <h3 class="cat-title">Performance & ECU</h3>
+              </div>
+              <div class="mod-items-list">
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="1500" data-name="Remapeamento ECU Stage 2 + Pops & Bangs + Antilag" />
+                  <span class="mod-name">Remap ECU Stage 2 + Pops & Bangs</span>
+                  <span class="mod-price">+ R$ 1.500</span>
+                </label>
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="12000" data-name="Kit Turbocharger Roletado + Intercooler Frontal" />
+                  <span class="mod-name">Kit Turbo Roletado + Intercooler</span>
+                  <span class="mod-price">+ R$ 12.000</span>
+                </label>
+                <label class="mod-checkbox-row">
+                  <input type="checkbox" class="mod-check" data-price="3500" data-name="Escape Completo Inox 3.5 Pol com Válvula Eletrônica" />
+                  <span class="mod-name">Escape Inox 3.5 com Válvula Ronco</span>
+                  <span class="mod-price">+ R$ 3.500</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Totalizador Flutuante do Orçamento -->
+          <div class="mod-summary-bar">
+            <div class="summary-info">
+              <span class="summary-label">SETUP ESTIMADO // <span id="selected-mods-count">0 modificações</span></span>
+              <div class="summary-total" id="summary-total-display">R$ 0,00</div>
+            </div>
+            <button class="btn-neon-primary" id="btn-enviar-setup">
+              CONTRATAR SETUP VIA WHATSAPP
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 4: MARKETPLACE "THE PARTS VAULT" -->
+      <!-- ========================================== -->
+      <section class="section-container" id="parts-vault">
+        <div class="section-header">
+          <div class="section-tag">THE PARTS VAULT // PEÇAS DE PRECISÃO</div>
+          <h2 class="section-title">COMPOMENTES FORJADOS PARA <span class="glow-cyan">ALTA EXIGÊNCIA.</span></h2>
+          <p class="section-subtitle">
+            Componentes importados originais do Japão e Estados Unidos com certificação de bancada.
+          </p>
+        </div>
+
+        <div class="parts-grid">
+          <div class="part-card glass-panel">
+            <div class="part-img-box">
+              <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=600&q=80" alt="Turbo Garrett G35-900" loading="lazy" />
+              <span class="part-tag">GARRETT</span>
+            </div>
+            <div class="part-content">
+              <h3 class="part-name">Turbocharger Garrett G35-900</h3>
+              <p class="part-desc">Rotor forjado em alumínio maquinado, rolamentos duplos de cerâmica, carcaça quente em inox com suporte a até 900 cavalos.</p>
+              <div class="part-footer">
+                <span class="part-price">R$ 14.800</span>
+                <button class="btn-buy-part" data-part="Turbo Garrett G35-900 (R$ 14.800)">COMPRAR</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-card glass-panel">
+            <div class="part-img-box">
+              <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=600&q=80" alt="Intercooler Mishimoto Frontal" loading="lazy" />
+              <span class="part-tag">MISHIMOTO</span>
+            </div>
+            <div class="part-content">
+              <h3 class="part-name">Intercooler Frontal Bar & Plate 4 Pol</h3>
+              <p class="part-desc">Colmeia de fluxo otimizado para redução de temperatura de admissão em até 38°C sob pressão contínua de 2.5 BAR.</p>
+              <div class="part-footer">
+                <span class="part-price">R$ 5.400</span>
+                <button class="btn-buy-part" data-part="Intercooler Mishimoto 4 Pol (R$ 5.400)">COMPRAR</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-card glass-panel">
+            <div class="part-img-box">
+              <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80" alt="Volante Esportivo Nardi Deep Corn Alcantara" loading="lazy" />
+              <span class="part-tag">NARDI TORINO</span>
+            </div>
+            <div class="part-content">
+              <h3 class="part-name">Volante Nardi Deep Corn 350mm</h3>
+              <p class="part-desc">Estrutura em alumínio forjado anodizado preto, empunhadura em alcântara autêntica com costuras em Cyan elétrico e offset 80mm.</p>
+              <div class="part-footer">
+                <span class="part-price">R$ 2.950</span>
+                <button class="btn-buy-part" data-part="Volante Nardi Deep Corn (R$ 2.950)">COMPRAR</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="part-card glass-panel">
+            <div class="part-img-box">
+              <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="Banco Concha Bride Low Max Carbono" loading="lazy" />
+              <span class="part-tag">BRIDE JAPAN</span>
+            </div>
+            <div class="part-content">
+              <h3 class="part-name">Banco Concha Bride Low Max Carbon</h3>
+              <p class="part-desc">Casulo traseiro 100% fibra de carbono aparente, tecido anti-chamas gradation original japonês com passagem para cinto 6 pontos.</p>
+              <div class="part-footer">
+                <span class="part-price">R$ 8.900</span>
+                <button class="btn-buy-part" data-part="Banco Bride Low Max Carbono (R$ 8.900)">COMPRAR</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SEÇÃO 5: CONTRATO DE EXCLUSIVIDADE & CTA -->
+      <!-- ========================================== -->
+      <section class="section-container" id="contract-section">
+        <div class="contract-card glass-panel">
+          <div class="contract-content">
+            <span class="contract-badge">PROTOCOLO DE RESERVA // VAGAS LIMITADAS</span>
+            <h2 class="contract-title">
+              NÃO MONTAMOS CARROS PARA TODOS. <br />
+              <span class="glow-gradient">MONTAMOS PARA QUEM LIDERA.</span>
+            </h2>
+            <p class="contract-desc">
+              Aceitamos apenas quatro projetos simultâneos na oficina por trimestre. Cada parafuso recebe torque de precisão, telemetria em dinamômetro e acabamento artesanal digno dos filmes.
+            </p>
+            <div class="contract-terms">
+              <span>✓ Dinamômetro 4x4 com Laudo Técnico</span>
+              <span>✓ Certificado de Autenticidade JDM Spec</span>
+              <span>✓ Termo de Sigilo & Assistência de Pista</span>
+            </div>
+            <a
+              href="https://wa.me/5511999990000?text=Ol%C3%A1%2C%20desejo%20entrar%20para%20a%20elite.%20Quero%20assinar%20um%20contrato%20de%20customiza%C3%A7%C3%A3o%20para%20minha%20m%C3%A1quina."
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-neon-primary btn-contract-large"
+              id="btn-contrato-exclusivo"
+            >
+              <span>ASSINAR CONTRATO DE PROJETO</span>
+              <span class="btn-glow-border"></span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Botão Flutuante de WhatsApp com Ícone de Engrenagem Neon -->
+    <a
+      href="https://wa.me/5511999990000?text=Ol%C3%A1%2C%20desejo%20um%20or%C3%A7amento%20r%C3%A1pido%20para%20minha%20m%C3%A1quina%20na%20Neon%20Velocity."
+      target="_blank"
+      rel="noopener noreferrer"
+      class="floating-whatsapp-gear"
+      id="floating-whatsapp"
+      aria-label="Orçamento Rápido no WhatsApp"
+      title="Falar com a Equipe Neon Velocity"
+    >
+      <div class="gear-icon-wrapper">
+        <svg class="gear-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </div>
+      <span class="gear-tooltip">ORÇAMENTO RÁPIDO</span>
+    </a>
+
+    <!-- Rodapé Underground Deluxe -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <span class="logo-racing">NEON VELOCITY</span>
+          <span class="logo-sub">UNDERGROUND DELUXE MOTORWORKS</span>
+          <p class="footer-text">
+            Inspirado nas lendas do Drag Racing e nas madrugadas aceleradas de Shibuya e Daikoku Futo.
+          </p>
+        </div>
+        <div class="footer-info">
+          <div class="info-block">
+            <span class="info-label">OFICINA CENTRAL</span>
+            <span class="info-val">Av. Nações Unidas / Galpão 04 - SP</span>
+          </div>
+          <div class="info-block">
+            <span class="info-label">LINHA DE CONTATO</span>
+            <span class="info-val">+55 (11) 99999-0000</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NEON VELOCITY CUSTOMS. TODOS OS DIREITOS RESERVADOS.</span>
+        <span>JDM HIGH PERFORMANCE TUNING SPEC.</span>
+      </div>
+    </footer>
+
+    <!-- Scripts da Plataforma -->
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1255 @@
+/* ============================================================
+   NEON VELOCITY CUSTOMS // STYLESHEET PRINCIPAL
+   Direção de Arte: Tokyo Drift & Fast and Furious (1-4)
+   Paleta: Matte Carbon Black, Electric Cyan, Vivid Magenta
+   ============================================================ */
+
+:root {
+  --color-bg-carbon: #0A0A0A;
+  --color-bg-slate: #141416;
+  --color-bg-card: rgba(22, 22, 26, 0.75);
+  
+  --color-neon-cyan: #00FFFF;
+  --color-neon-magenta: #FF00FF;
+  --color-neon-glow-cyan: rgba(0, 255, 255, 0.45);
+  --color-neon-glow-magenta: rgba(255, 0, 255, 0.45);
+  
+  --color-text-white: #FFFFFF;
+  --color-text-silver: #E0E0E6;
+  --color-text-muted: #8E8E9F;
+  
+  --font-racing: 'Chakra Petch', sans-serif, system-ui;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  
+  --border-neon-cyan: 1px solid rgba(0, 255, 255, 0.35);
+  --border-neon-magenta: 1px solid rgba(255, 0, 255, 0.35);
+  
+  --shadow-neon-cyan: 0 0 25px rgba(0, 255, 255, 0.35);
+  --shadow-neon-magenta: 0 0 25px rgba(255, 0, 255, 0.35);
+}
+
+/* Reset Global */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-carbon);
+  color: var(--color-text-white);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-bg-carbon);
+  min-height: 100vh;
+  position: relative;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Textura sutil de Fibra de Carbono / Scanlines */
+.carbon-texture-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 24px 24px, 100% 4px;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.6;
+}
+
+/* Scrollbar Personalizada Neon */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+}
+
+/* Tipografia de Efeito Neon */
+.glow-cyan {
+  color: var(--color-neon-cyan);
+  text-shadow: 0 0 15px var(--color-neon-cyan), 0 0 30px rgba(0, 255, 255, 0.6);
+}
+
+.glow-magenta {
+  color: var(--color-neon-magenta);
+  text-shadow: 0 0 15px var(--color-neon-magenta), 0 0 30px rgba(255, 0, 255, 0.6);
+}
+
+.glow-gradient {
+  background: linear-gradient(90deg, var(--color-neon-cyan), var(--color-neon-magenta));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
+}
+
+/* ============================================================
+   NAVBAR FIXA // UNDERGROUND DELUXE
+   ============================================================ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 1.5rem;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  padding: 0.75rem 1.5rem;
+  background: rgba(10, 10, 10, 0.95);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.nav-logo {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-racing {
+  font-family: var(--font-racing);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 1.45rem;
+  letter-spacing: 0.12em;
+  color: #FFF;
+  text-transform: uppercase;
+}
+
+.logo-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-neon-cyan);
+  letter-spacing: 0.28em;
+  margin-top: -3px;
+}
+
+.nav-telemetry {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+@media (min-width: 900px) {
+  .nav-telemetry {
+    display: flex;
+  }
+}
+
+.pulse-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-neon-cyan);
+  box-shadow: 0 0 8px var(--color-neon-cyan);
+  animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.telemetry-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-neon-cyan);
+  letter-spacing: 0.15em;
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 820px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
+.nav-link {
+  font-family: var(--font-racing);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-text-silver);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 8px var(--color-neon-cyan);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-neon-cyan);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+@media (min-width: 820px) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+.menu-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--color-neon-cyan);
+  box-shadow: 0 0 5px var(--color-neon-cyan);
+  transition: all 0.3s;
+}
+
+/* ============================================================
+   BOTÕES NEON HIGH-TECH
+   ============================================================ */
+.btn-neon-primary, .btn-neon-cyan, .btn-neon-magenta, .btn-proposta, .btn-buy-part {
+  font-family: var(--font-racing);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+}
+
+.btn-neon-primary {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.15) 0%, rgba(255, 0, 255, 0.15) 100%);
+  color: #FFF;
+  border: 1px solid var(--color-neon-cyan);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.35);
+}
+
+.btn-neon-primary:hover {
+  background: var(--color-neon-cyan);
+  color: #0A0A0A;
+  box-shadow: 0 0 30px var(--color-neon-cyan), 0 0 50px rgba(0, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-neon-cyan {
+  background: var(--color-neon-cyan);
+  color: #0A0A0A;
+  box-shadow: 0 0 20px var(--color-neon-cyan);
+}
+
+.btn-neon-cyan:hover {
+  background: #FFF;
+  box-shadow: 0 0 35px #FFF;
+  transform: translateY(-2px);
+}
+
+.btn-neon-magenta {
+  background: transparent;
+  color: var(--color-neon-magenta);
+  border: 1px solid var(--color-neon-magenta);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+.btn-neon-magenta:hover {
+  background: var(--color-neon-magenta);
+  color: #FFF;
+  box-shadow: 0 0 35px var(--color-neon-magenta);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   SEÇÃO 1: HERO COM ANIMAÇÃO DE SCROLL (242 FRAMES)
+   ============================================================ */
+.scroll-hero-section {
+  position: relative;
+  /* Altura generosa que dita a velocidade e fluidez dos 242 frames */
+  height: 450vh;
+  background-color: var(--color-bg-carbon);
+}
+
+/* Viewport Preso (Sticky) que preenche 100% da tela durante a rolagem */
+.sticky-viewport {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+}
+
+/* Canvas que desenha o frame ativo mantendo proporção de tela */
+#scroll-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Vinheta de Iluminação Neon e Asfalto */
+.canvas-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(10, 10, 10, 0.85) 100%),
+    linear-gradient(180deg, rgba(10, 10, 10, 0.7) 0%, transparent 20%, transparent 80%, rgba(10, 10, 10, 0.95) 100%);
+}
+
+/* Loader de Pré-carregamento dos 242 Frames */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loader-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-box {
+  width: 90%;
+  max-width: 520px;
+  background: var(--color-bg-slate);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loader-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.loader-title {
+  color: var(--color-neon-cyan);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.loader-status {
+  color: #FFF;
+}
+
+.loader-bar-track {
+  width: 100%;
+  height: 6px;
+  background: #222;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+}
+
+.loader-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-neon-cyan), var(--color-neon-magenta));
+  box-shadow: 0 0 12px var(--color-neon-cyan);
+  transition: width 0.15s ease-out;
+}
+
+.loader-subtext {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+/* HUD Overlay sobre o Canvas de Scroll */
+.hud-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6rem 2rem 2.5rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.hud-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hud-badge {
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-badge.cyan {
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+}
+.hud-badge.cyan .hud-val { color: var(--color-neon-cyan); }
+
+.hud-badge.magenta {
+  border: 1px solid rgba(255, 0, 255, 0.4);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.15);
+}
+.hud-badge.magenta .hud-val { color: var(--color-neon-magenta); }
+
+.hud-badge.white {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.hud-badge.white .hud-val { color: #FFF; }
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.2em;
+}
+
+.hud-val {
+  font-family: var(--font-racing);
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.1em;
+}
+
+/* Textos Narrativos que Mudam no Scroll */
+.hud-narrative-container {
+  max-width: 650px;
+  pointer-events: auto;
+}
+
+.narrative-card {
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  background: rgba(14, 14, 18, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 4px solid var(--color-neon-cyan);
+  padding: 1.75rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+}
+
+.narrative-card.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+.tag-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-neon-cyan);
+  letter-spacing: 0.25em;
+  margin-bottom: 0.5rem;
+}
+
+.narrative-headline {
+  font-family: var(--font-racing);
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.85rem;
+}
+
+.narrative-body {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-silver);
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.scroll-prompt {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-neon-cyan);
+  letter-spacing: 0.2em;
+}
+
+.scroll-arrow {
+  display: inline-block;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.narrative-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Barra Inferior de Progresso */
+.hud-bottom-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.hud-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-neon-cyan), var(--color-neon-magenta));
+  box-shadow: 0 0 10px var(--color-neon-cyan);
+  transition: width 0.1s linear;
+}
+
+/* ============================================================
+   SEÇÕES GERAIS // CONTAINERS & CARDS GLASS
+   ============================================================ */
+.section-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+  position: relative;
+  z-index: 20;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 4rem auto;
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-neon-cyan);
+  letter-spacing: 0.25em;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: var(--font-racing);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.glass-panel {
+  background: rgba(20, 20, 24, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(0, 255, 255, 0.35);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 255, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+/* ============================================================
+   SEÇÃO 2: SHOWROOM "THE JDM LEGENDS"
+   ============================================================ */
+.car-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .car-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.car-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.car-badge-hot {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid var(--color-neon-cyan);
+  color: var(--color-neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+}
+
+.car-image-box {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #000;
+}
+
+.car-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.car-card:hover .car-image-box img {
+  transform: scale(1.06);
+}
+
+.car-price-tag {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid var(--color-neon-magenta);
+  color: #FFF;
+  font-family: var(--font-racing);
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-style: italic;
+  padding: 0.35rem 0.9rem;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.35);
+}
+
+.car-details {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.car-name {
+  font-family: var(--font-racing);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #FFF;
+}
+
+.car-edition {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-neon-cyan);
+  letter-spacing: 0.15em;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.car-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-silver);
+  font-weight: 300;
+  margin: 1rem 0 1.25rem 0;
+  line-height: 1.5;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.spec-k {
+  color: var(--color-text-muted);
+}
+
+.btn-proposta {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-white);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-proposta:hover {
+  background: var(--color-neon-cyan);
+  color: #0A0A0A;
+  border-color: var(--color-neon-cyan);
+  box-shadow: 0 0 20px var(--color-neon-cyan);
+}
+
+/* ============================================================
+   SEÇÃO 3: THE MOD SHOP // CHECKLIST DE PERFORMANCE
+   ============================================================ */
+.mod-shop-container {
+  padding: 2.5rem;
+}
+
+.mod-categories-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 820px) {
+  .mod-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mod-category-card {
+  background: rgba(14, 14, 16, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.cat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cat-title {
+  font-family: var(--font-racing);
+  font-size: 1.15rem;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #FFF;
+}
+
+.mod-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.mod-checkbox-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+
+.mod-checkbox-row:hover {
+  background: rgba(0, 255, 255, 0.04);
+  border-color: rgba(0, 255, 255, 0.2);
+}
+
+.mod-check {
+  accent-color: var(--color-neon-cyan);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.mod-name {
+  flex: 1;
+  color: var(--color-text-silver);
+}
+
+.mod-price {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-neon-cyan);
+  font-weight: 700;
+}
+
+.mod-summary-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid var(--color-neon-magenta);
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+}
+
+@media (min-width: 680px) {
+  .mod-summary-bar {
+    flex-direction: row;
+  }
+}
+
+.summary-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.15em;
+  display: block;
+}
+
+.summary-total {
+  font-family: var(--font-racing);
+  font-size: 2rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--color-neon-magenta);
+  text-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+}
+
+/* ============================================================
+   SEÇÃO 4: THE PARTS VAULT
+   ============================================================ */
+.parts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .parts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .parts-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.part-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.part-img-box {
+  position: relative;
+  aspect-ratio: 1;
+  background: #000;
+  overflow: hidden;
+}
+
+.part-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.part-card:hover .part-img-box img {
+  transform: scale(1.08);
+}
+
+.part-tag {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  background: rgba(10, 10, 10, 0.85);
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  color: var(--color-neon-cyan);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+
+.part-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.part-name {
+  font-family: var(--font-racing);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: #FFF;
+  margin-bottom: 0.5rem;
+}
+
+.part-desc {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin-bottom: 1.25rem;
+}
+
+.part-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.part-price {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-neon-cyan);
+}
+
+.btn-buy-part {
+  padding: 0.45rem 1rem;
+  font-size: 0.75rem;
+  background: rgba(0, 255, 255, 0.1);
+  color: var(--color-neon-cyan);
+  border: 1px solid var(--color-neon-cyan);
+}
+
+.btn-buy-part:hover {
+  background: var(--color-neon-cyan);
+  color: #0A0A0A;
+}
+
+/* ============================================================
+   SEÇÃO 5: CONTRATO DE EXCLUSIVIDADE
+   ============================================================ */
+.contract-card {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(20, 20, 26, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 50px rgba(0, 255, 255, 0.15);
+}
+
+.contract-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-neon-magenta);
+  letter-spacing: 0.25em;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.contract-title {
+  font-family: var(--font-racing);
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+
+.contract-desc {
+  max-width: 650px;
+  margin: 0 auto 2rem auto;
+  font-size: 1rem;
+  color: var(--color-text-silver);
+  line-height: 1.6;
+}
+
+.contract-terms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-neon-cyan);
+  margin-bottom: 2.5rem;
+}
+
+.btn-contract-large {
+  padding: 1.25rem 3rem;
+  font-size: 1rem;
+}
+
+/* ============================================================
+   BOTÃO FLUTUANTE DE WHATSAPP COM ENGRENAGEM NEON
+   ============================================================ */
+.floating-whatsapp-gear {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.gear-icon-wrapper {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.95);
+  border: 2px solid var(--color-neon-cyan);
+  box-shadow: 0 0 25px var(--color-neon-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-neon-cyan);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gear-svg {
+  width: 30px;
+  height: 30px;
+  animation: gear-rotate 8s linear infinite;
+}
+
+@keyframes gear-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.floating-whatsapp-gear:hover .gear-icon-wrapper {
+  transform: scale(1.1);
+  border-color: var(--color-neon-magenta);
+  color: var(--color-neon-magenta);
+  box-shadow: 0 0 35px var(--color-neon-magenta);
+}
+
+.gear-tooltip {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  color: #FFF;
+  padding: 0.4rem 0.85rem;
+  border-radius: 4px;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+
+@media (min-width: 600px) {
+  .floating-whatsapp-gear:hover .gear-tooltip {
+    display: block;
+  }
+}
+
+/* ============================================================
+   RODAPÉ UNDERGROUND
+   ============================================================ */
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4rem 1.5rem 2rem 1.5rem;
+  background: #060608;
+  position: relative;
+  z-index: 20;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  justify-content: space-between;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+  }
+}
+
+.footer-text {
+  max-width: 450px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-top: 0.75rem;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.info-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-neon-cyan);
+  letter-spacing: 0.2em;
+  display: block;
+}
+
+.info-val {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: #FFF;
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 2rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 600px) {
+  .footer-bottom {
+    flex-direction: row;
+  }
+}
+
+/* ============================================================
+   PREFERS-REDUCED-MOTION (ACESSIBILIDADE)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .scroll-hero-section {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .sticky-viewport {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .hud-narrative-container .narrative-card {
+    position: relative !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    margin-bottom: 1.5rem;
+  }
+
+  .gear-svg, .scroll-arrow, .pulse-indicator {
+    animation: none !important;
+  }
+}
